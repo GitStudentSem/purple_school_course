@@ -9,6 +9,7 @@ import { ConfigModule } from "@nestjs/config";
 
 @Module({
 	imports: [
+		// MongooseModule.forRoot("mongodb://localhost/test"),
 		ConfigModule.forRoot(),
 		AuthModule,
 		TopPageModule,
