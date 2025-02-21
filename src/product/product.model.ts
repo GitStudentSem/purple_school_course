@@ -1,4 +1,4 @@
-import { Prop, Schema } from "@nestjs/mongoose";
+import { Prop, Schema, SchemaFactory } from "@nestjs/mongoose";
 
 class ProductCharacteristic {
 	@Prop()
@@ -46,3 +46,4 @@ export class ProductModel {
 	@Prop({ type: [ProductCharacteristic], default: [], _id: false }) // Объект с произвольными ключами и значениями
 	characteristics: ProductCharacteristic[];
 }
+export const ProductSchema = SchemaFactory.createForClass(ProductModel);

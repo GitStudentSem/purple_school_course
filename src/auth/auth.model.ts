@@ -1,4 +1,4 @@
-import { Prop, Schema } from "@nestjs/mongoose";
+import { Prop, Schema, SchemaFactory } from "@nestjs/mongoose";
 
 Schema({ timestamps: true, _id: true });
 export class AuthModel {
@@ -8,3 +8,4 @@ export class AuthModel {
 	@Prop()
 	passwordHash: string;
 }
+export const AuthSchema = SchemaFactory.createForClass(AuthModel);

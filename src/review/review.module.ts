@@ -1,7 +1,7 @@
 import { Module } from "@nestjs/common";
 import { ReviewController } from "./review.controller";
 import { MongooseModule } from "@nestjs/mongoose";
-import { ReviewModel } from "./review.model";
+import { ReviewSchema } from "./review.model";
 
 @Module({
 	controllers: [ReviewController],
@@ -9,7 +9,7 @@ import { ReviewModel } from "./review.model";
 		MongooseModule.forFeature([
 			{
 				name: "Review", // Имя коллекции в MongoDB (будет использовано для модели)
-				schema: ReviewModel, // Схема, определенная через @nestjs/mongoose
+				schema: ReviewSchema, // Схема, определенная через @nestjs/mongoose
 			},
 		]),
 	],

@@ -1,7 +1,7 @@
 import { Module } from "@nestjs/common";
 import { AuthController } from "./auth.controller";
 import { MongooseModule } from "@nestjs/mongoose";
-import { AuthModel } from "./auth.model";
+import { AuthSchema } from "./auth.model";
 
 @Module({
 	controllers: [AuthController],
@@ -9,7 +9,7 @@ import { AuthModel } from "./auth.model";
 		MongooseModule.forFeature([
 			{
 				name: "Auth", // Имя коллекции в MongoDB (будет использовано для модели)
-				schema: AuthModel, // Схема, определенная через @nestjs/mongoose
+				schema: AuthSchema, // Схема, определенная через @nestjs/mongoose
 			},
 		]),
 	],

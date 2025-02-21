@@ -1,8 +1,7 @@
 import { Module } from "@nestjs/common";
 import { ProductController } from "./product.controller";
 import { MongooseModule } from "@nestjs/mongoose";
-import { AuthModel } from "src/auth/auth.model";
-import { ProductModel } from "./product.model";
+import { ProductSchema } from "./product.model";
 
 @Module({
 	controllers: [ProductController],
@@ -10,7 +9,7 @@ import { ProductModel } from "./product.model";
 		MongooseModule.forFeature([
 			{
 				name: "Product", // Имя коллекции в MongoDB (будет использовано для модели)
-				schema: ProductModel, // Схема, определенная через @nestjs/mongoose
+				schema: ProductSchema, // Схема, определенная через @nestjs/mongoose
 			},
 		]),
 	],

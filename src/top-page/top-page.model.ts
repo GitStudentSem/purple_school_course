@@ -1,4 +1,4 @@
-import { Prop, Schema } from "@nestjs/mongoose";
+import { Prop, Schema, SchemaFactory } from "@nestjs/mongoose";
 
 export enum TopLevelCategory {
 	Courses = 0,
@@ -61,3 +61,4 @@ export class TopPageModel {
 	@Prop({ type: [String] })
 	tags: string[];
 }
+export const TopPageSchema = SchemaFactory.createForClass(TopPageModel);
