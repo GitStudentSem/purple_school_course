@@ -1,15 +1,48 @@
+import { Prop, Schema } from "@nestjs/mongoose";
+
+class ProductCharacteristic {
+	@Prop()
+	name: string;
+
+	@Prop()
+	value: string;
+}
+
+Schema({ _id: true });
 export class ProductModel {
-	_id: string;
+	@Prop()
 	image: string;
+
+	@Prop()
 	title: string;
+
+	@Prop()
 	price: number;
-	oldProce: number;
-	credit: number;
-	calculatedRating: number;
-	descrption: string;
+
+	@Prop()
+	oldPrice?: number; // Дополнительное поле, может быть необязательным
+
+	@Prop()
+	credit?: number; // Дополнительное поле, может быть необязательным
+
+	@Prop()
+	calculatedRating?: number; // Дополнительное поле, может быть необязательным
+
+	@Prop()
+	description: string; // Исправил опечатку (было "descrption")
+
+	@Prop()
 	advantages: string;
+
+	@Prop()
 	disAdvantages: string;
+
+	@Prop({ type: [String], default: [] }) // Массив строк
 	categories: string[];
-	tags: string;
-	characteristics: { [key: string]: string };
+
+	@Prop({ type: [String], default: [] }) // Массив строк
+	tags: string[];
+
+	@Prop({ type: [ProductCharacteristic], default: [], _id: false }) // Объект с произвольными ключами и значениями
+	characteristics: ProductCharacteristic[];
 }
