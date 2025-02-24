@@ -1,7 +1,7 @@
 import { Injectable } from "@nestjs/common";
 import { ReviewModel, ReviewDocument } from "./review.model";
 import { InjectModel } from "@nestjs/mongoose";
-import { Model, Types } from "mongoose";
+import { DeleteResult, Model, Types } from "mongoose";
 import { CreateReviewDto } from "./dto/createReview.dto";
 
 @Injectable()
@@ -24,7 +24,7 @@ export class ReviewService {
 			.exec();
 	}
 
-	async deleteByProductId(productId: string) {
+	async deleteByProductId(productId: string): Promise<DeleteResult> {
 		return this.reviewModel
 			.deleteMany({
 				productId: new Types.ObjectId(productId),

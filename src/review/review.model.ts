@@ -4,7 +4,6 @@ import { HydratedDocument, Schema as MSchema } from "mongoose";
 export type ReviewDocument = HydratedDocument<ReviewModel>;
 
 Schema({ _id: true, timestamps: true });
-
 export class ReviewModel {
 	@Prop()
 	name: string;
