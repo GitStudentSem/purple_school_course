@@ -8,7 +8,7 @@ class ProductCharacteristic {
 	value: string;
 }
 
-Schema({ _id: true });
+@Schema({ _id: true })
 export class ProductModel {
 	@Prop()
 	image: string;

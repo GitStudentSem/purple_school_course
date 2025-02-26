@@ -11,10 +11,7 @@ export class ReviewService {
 	) {}
 
 	async create(dto: CreateReviewDto): Promise<ReviewDocument> {
-		console.log("in service dto", dto);
-		const res = await this.reviewModel.create(dto);
-		console.log("res", res);
-		return res;
+		return this.reviewModel.create(dto);
 	}
 
 	async delete(id: string): Promise<ReviewDocument | null> {
@@ -24,7 +21,7 @@ export class ReviewService {
 	// Этот тест валится
 	async findByProductId(productId: string): Promise<ReviewDocument[]> {
 		return this.reviewModel
-			.find({ product: new Types.ObjectId(productId) })
+			.find({ productId: new Types.ObjectId(productId) })
 			.exec();
 	}
 

@@ -4,7 +4,7 @@ import { ProductModel } from "../../src/product/product.model";
 
 export type ReviewDocument = HydratedDocument<ReviewModel>;
 
-Schema({ _id: true, timestamps: true });
+@Schema({ _id: true, timestamps: true })
 export class ReviewModel {
 	@Prop()
 	name: string;
@@ -18,7 +18,7 @@ export class ReviewModel {
 	@Prop()
 	rating: number;
 
-	@Prop({ type: MSchema.Types.ObjectId, ref: ProductModel })
+	@Prop({ type: MSchema.Types.ObjectId, ref: () => ProductModel })
 	productId: MSchema.Types.ObjectId;
 }
 
