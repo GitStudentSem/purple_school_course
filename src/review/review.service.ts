@@ -11,16 +11,20 @@ export class ReviewService {
 	) {}
 
 	async create(dto: CreateReviewDto): Promise<ReviewDocument> {
-		return this.reviewModel.create(dto);
+		console.log("in service dto", dto);
+		const res = await this.reviewModel.create(dto);
+		console.log("res", res);
+		return res;
 	}
 
 	async delete(id: string): Promise<ReviewDocument | null> {
 		return this.reviewModel.findByIdAndDelete(id).exec();
 	}
 
+	// Этот тест валится
 	async findByProductId(productId: string): Promise<ReviewDocument[]> {
 		return this.reviewModel
-			.find({ productId: new Types.ObjectId(productId) })
+			.find({ product: new Types.ObjectId(productId) })
 			.exec();
 	}
 
