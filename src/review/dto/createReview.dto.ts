@@ -18,3 +18,11 @@ export class CreateReviewDto {
 	@IsString()
 	productId: string;
 }
+
+const test = {
+	name: "Semyon",
+	title: "Title",
+	description: "Description",
+	rating: 3,
+	productId: "67c3466e84b21782a8255254",
+};
