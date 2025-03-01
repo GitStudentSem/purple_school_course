@@ -36,4 +36,3 @@ export class AuthController {
 		return this.authService.login(email);
 	}
 }
-// {"login": "a@a.ru","password": "1"}
