@@ -6,6 +6,7 @@ import { AppModule } from "../src/app.module";
 import { CreateReviewDto } from "../src/review/dto/createReview.dto";
 import { disconnect, Types } from "mongoose";
 import { REVIEW_NOT_FOUND } from "../src/review/review.constants";
+import { race } from "rxjs";
 
 const productId = new Types.ObjectId().toHexString();
 const testDto: CreateReviewDto = {
@@ -35,9 +36,19 @@ describe("AppController (e2e)", () => {
 			.send(testDto)
 			.expect(201)
 			.then(({ body }: request.Response) => {
-				console.log("body", body);
 				createdId = body._id;
 				expect(createdId).toBeDefined();
+				return;
+			});
+	});
+
+	it("/review/create (POST) -failed", async () => {
+		return request(app.getHttpServer())
+			.post("/review/create")
+			.send({ ...testDto, rating: 0 })
+			.expect(400)
+			.then(({ body }: request.Response) => {
+				console.log("body", body);
 				return;
 			});
 	});
