@@ -14,8 +14,8 @@ import {
 import { CreateReviewDto } from "./dto/createReview.dto";
 import { ReviewService } from "./review.service";
 import { REVIEW_NOT_FOUND } from "./review.constants";
-import { JwtAuthGuard } from "src/auth/guards/jwt.guard";
-import { UserEmail } from "src/decorators/user-email.decorator";
+import { JwtAuthGuard } from "@src/auth/guards/jwt.guard";
+import { UserEmail } from "@src/decorators/user-email.decorator";
 
 @Controller("review")
 export class ReviewController {
@@ -36,7 +36,6 @@ export class ReviewController {
 		}
 	}
 
-	@UseGuards(JwtAuthGuard)
 	@Get("byProduct/:productId")
 	async getByProduct(
 		@Param("productId") productId: string,
