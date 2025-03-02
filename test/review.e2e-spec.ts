@@ -50,15 +50,11 @@ describe("AppController (e2e)", () => {
 			});
 	});
 
-	it("/review/create (POST) -failed", async () => {
+	it("/review/create (POST) -failed", () => {
 		return request(app.getHttpServer())
 			.post("/review/create")
 			.send({ ...testDto, rating: 0 })
-			.expect(400)
-			.then(({ body }: request.Response) => {
-				console.log("body", body);
-				return;
-			});
+			.expect(400);
 	});
 
 	it("/review/byProduct/:productId (GET) -success", async () => {
