@@ -6,7 +6,6 @@ import { AppModule } from "../src/app.module";
 import { CreateReviewDto } from "../src/review/dto/createReview.dto";
 import { disconnect, Types } from "mongoose";
 import { REVIEW_NOT_FOUND } from "../src/review/review.constants";
-import { race } from "rxjs";
 
 const productId = new Types.ObjectId().toHexString();
 const testDto: CreateReviewDto = {
