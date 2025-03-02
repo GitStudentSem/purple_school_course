@@ -33,7 +33,7 @@ describe("AppController (e2e)", () => {
 		await app.init();
 
 		const { body } = await request(app.getHttpServer())
-			.post("auth/login")
+			.post("/auth/login")
 			.send(loginDto);
 		token = body.access_token;
 	});
