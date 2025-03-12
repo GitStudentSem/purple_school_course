@@ -14,6 +14,7 @@ import { Product } from "./product.model";
 import { FindProductDto } from "./dto/find-product.dto";
 import { CreateProductDto } from "./dto/createProduct.dto";
 import { ProductService } from "./product.service";
+import { IdValidationPipe } from "@src/pipes/id-validation.pipe";
 
 @Controller("product")
 export class ProductController {
@@ -25,17 +26,17 @@ export class ProductController {
 	}
 
 	@Get(":id")
-	async get(@Param("id") id: string) {
+	async get(@Param("id", IdValidationPipe) id: string) {
 		return this.productService.findById(id);
 	}
 
 	@Delete(":id")
-	async delete(@Param("id") id: string) {
+	async delete(@Param("id", IdValidationPipe) id: string) {
 		return this.productService.deleteById(id);
 	}
 
 	@Patch(":id")
-	async patch(@Param("id") id: string, @Body() dto: Product) {
+	async patch(@Param("id", IdValidationPipe) id: string, @Body() dto: Product) {
 		return this.productService.updateById(id, dto);
 	}
 
