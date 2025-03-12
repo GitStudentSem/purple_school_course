@@ -19,3 +19,10 @@ export class CreateReviewDto {
 	productId: string;
 }
 
+const testObj: CreateReviewDto = {
+	name: "Test 1",
+	title: "Title",
+	description: "Description of review",
+	rating: 4,
+	productId: "67d1b25af26c03342b4ef3bb",
+};

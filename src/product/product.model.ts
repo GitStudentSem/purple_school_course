@@ -1,4 +1,5 @@
 import { Prop, Schema, SchemaFactory } from "@nestjs/mongoose";
+import { HydratedDocument } from "mongoose";
 
 class ProductCharacteristic {
 	@Prop()
@@ -7,9 +8,10 @@ class ProductCharacteristic {
 	@Prop()
 	value: string;
 }
+export type ProductDocument = HydratedDocument<Product>;
 
 @Schema({ _id: true })
-export class ProductModel {
+export class Product {
 	@Prop()
 	image: string;
 
@@ -20,16 +22,13 @@ export class ProductModel {
 	price: number;
 
 	@Prop()
-	oldPrice?: number; // Дополнительное поле, может быть необязательным
+	oldPrice?: number;
 
 	@Prop()
-	credit?: number; // Дополнительное поле, может быть необязательным
+	credit?: number;
 
 	@Prop()
-	calculatedRating?: number; // Дополнительное поле, может быть необязательным
-
-	@Prop()
-	description: string; // Исправил опечатку (было "descrption")
+	description: string;
 
 	@Prop()
 	advantages: string;
@@ -37,13 +36,13 @@ export class ProductModel {
 	@Prop()
 	disAdvantages: string;
 
-	@Prop({ type: [String], default: [] }) // Массив строк
+	@Prop({ type: [String], default: [] })
 	categories: string[];
 
-	@Prop({ type: [String], default: [] }) // Массив строк
+	@Prop({ type: [String], default: [] })
 	tags: string[];
 
-	@Prop({ type: [ProductCharacteristic], default: [], _id: false }) // Объект с произвольными ключами и значениями
+	@Prop({ type: [ProductCharacteristic], default: [], _id: false })
 	characteristics: ProductCharacteristic[];
 }
-export const ProductSchema = SchemaFactory.createForClass(ProductModel);
+export const ProductSchema = SchemaFactory.createForClass(Product);
