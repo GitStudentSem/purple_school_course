@@ -7,30 +7,59 @@ import {
 	Param,
 	Patch,
 	Post,
+	UseGuards,
+	UsePipes,
+	ValidationPipe,
 } from "@nestjs/common";
-import { TopPageModel } from "./top-page.model";
+import { TopPage } from "./top-page.model";
 import { FindTopPageDto } from "./dto/find-top-page.dto";
-import { ConfigService } from "@nestjs/config";
+import { CreateTopPageDto } from "./dto/create-top-page.dto";
+import { TopPageService } from "./top-page.service";
+import { IdValidationPipe } from "@src/pipes/id-validation.pipe";
+import { JwtAuthGuard } from "@src/auth/guards/jwt.guard";
 
 @Controller("top-page")
 export class TopPageController {
-	constructor(private readonly configService: ConfigService) {}
+	constructor(private readonly topPageServie: TopPageService) {}
 
+	@UseGuards(JwtAuthGuard)
+	@UsePipes(new ValidationPipe())
 	@Post("create")
-	async create(@Body() dto: Omit<TopPageModel, "_id">) {
-		this.configService.get("TEST");
+	async create(@Body() dto: CreateTopPageDto) {
+		return this.topPageServie.create(dto);
 	}
 
+	@UseGuards(JwtAuthGuard)
 	@Get(":id")
-	async get(@Param("id") id: string) {}
+	async get(@Param("id", IdValidationPipe) id: string) {
+		return this.topPageServie.findById(id);
+	}
 
+	@Get("byAlias/:alias")
+	async getByAlias(@Param("alias") alias: string) {
+		return this.topPageServie.findByAlias(alias);
+	}
+
+	@UseGuards(JwtAuthGuard)
 	@Delete(":id")
-	async delete(@Param("id") id: string) {}
+	async delete(@Param("id", IdValidationPipe) id: string) {
+		return this.topPageServie.deleteById(id);
+	}
 
+	@UseGuards(JwtAuthGuard)
+	@UsePipes(new ValidationPipe())
 	@Patch(":id")
-	async patch(@Param("id") id: string, @Body() dto: TopPageModel) {}
+	async patch(
+		@Param("id", IdValidationPipe) id: string,
+		@Body() dto: CreateTopPageDto,
+	) {
+		return this.topPageServie.updateById(id, dto);
+	}
 
+	@UsePipes(new ValidationPipe())
 	@HttpCode(200)
-	@Post()
-	async find(@Body() dto: FindTopPageDto) {}
+	@Post("find")
+	async find(@Body() dto: FindTopPageDto) {
+		return this.topPageServie.findByCategory(dto.firstCategory);
+	}
 }
