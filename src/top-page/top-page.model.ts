@@ -62,3 +62,7 @@ export class TopPage {
 	tags: string[];
 }
 export const TopPageSchema = SchemaFactory.createForClass(TopPage);
+
+TopPageSchema.index({ "$**": "text" });
+// текстовый поиск конкретных полей
+// TopPageSchema.index({ title: "text", seoText: "text"});
